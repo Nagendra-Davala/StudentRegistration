@@ -1,0 +1,86 @@
+﻿.hero {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    background-position: center;
+    background-size: cover;
+    background: #a3a5a79c;
+    position: absolute;
+}
+
+.form-box {
+    width: 480px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    background: #a3a5a79c;
+    padding: 5px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+.gender-select {
+    margin-left: 1.2cm;
+   
+}
+
+
+.full-name{
+   margin-left:1cm;
+}
+.full-name-label {
+    margin-left: 2.3cm;
+}
+.full-name-label-l {
+    margin-left: 1.9cm;
+}
+.gender {
+    margin-left: 4.4cm;
+}
+.gender-text {
+    margin-left:1.2cm;
+}
+.state-error {
+    margin-left: 1.5cm;
+}
+.number{
+    margin-left :3.3cm;
+}
+
+.city {
+    margin-left: 1cm;
+    
+}
+.state {
+    margin-left: 5cm;
+}
+.btn-custom {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display : inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.sb-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.text-danger1
+{
+   color :red;
+}
+.btn-space{
+    text-indent:390px;
+}
