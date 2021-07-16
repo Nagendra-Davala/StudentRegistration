@@ -10,12 +10,15 @@ namespace StudentRegistration.Controllers
     public class StudentController : Controller
     {
 
-        private readonly StudentRepository studentRepository;
-        public StudentController()
+        private  IStudentRepository _studentRepository;
+        public StudentController(IStudentRepository studentRepository)
         {
-           studentRepository = new StudentRepository();
+           _studentRepository = studentRepository;
         }
-
+        public IActionResult Sample()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();
@@ -26,28 +29,25 @@ namespace StudentRegistration.Controllers
             return View();
         }
         [HttpPost]
-        //public IActionResult StudentForm(StudentModel student)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        StudentModel newStudent = studentRepository.Add(student);
-        //        return RedirectToAction("StudentDetails", new { student1 = newStudent });
-        //    }
+        public IActionResult StudentForm(StudentModel student)
+        {
+            if (ModelState.IsValid)
+            {
+                StudentModel newStudent = _studentRepository.Add(student);
+                 return RedirectToAction("GetStudent", new { id = newStudent.Id });
+            }
 
-        //    return View();
-        //}
+            return View();
+        }
+        public IActionResult GetStudent(int id)
+        {
+            StudentModel student1 = _studentRepository.GetStudent(id);
+            return View("StudentDetails", student1);
+        }
 
         public IActionResult StudentDetails(StudentModel student)
         {
-
-            if (ModelState.IsValid)
-            {
-                StudentModel newStudent = studentRepository.Add(student);
-                return View(newStudent);
-            }
-
-            return View("StudentForm");
-
+            return View(student);
         }
     }
 }

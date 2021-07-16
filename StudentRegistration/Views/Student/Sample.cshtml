@@ -1,0 +1,30 @@
+﻿@model StudentModel
+
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <label>Student Name</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text"asp-for="FName"/><br />
+               <label>Full Name</label><br />
+                <span asp-validation-for="FName"></span>
+            </div>
+            <div class="col-md-4">
+                <input type="text" asp-for="MName"/><br />
+                <label>Middle Name</label><br />
+                <span asp-validation-for="MName"></span>
+            </div>
+            <div class="col-md-4">
+                <input type="text" asp-for="LName" /><br />
+                <label>Last Name</label><br />
+                <span asp-validation-for="LName"></span>
+            </div>
+        </div>
+
+    </div>
+</form> 

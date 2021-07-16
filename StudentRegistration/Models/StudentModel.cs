@@ -12,6 +12,8 @@ namespace StudentRegistration.Models
     public enum CoursesList { Windows8, IntroductionToLinux, English101, English102, CreativeWriting1, CreativeWriting2, History101, History102, Math101, Math102 }
     public class StudentModel
     {
+    
+       public int Id { set; get; }
         [Required(ErrorMessage ="First Name not be null..")]
        [RegularExpression(@"^[a-zA-Z]+$",ErrorMessage ="First Name- Alphabets Only!..")]
         public string FName { get; set; }
