@@ -14,24 +14,23 @@ namespace StudentRegistration.Models
     {
     
        public int Id { set; get; }
-        [Required(ErrorMessage ="First Name not be null..")]
-       [RegularExpression(@"^[a-zA-Z]+$",ErrorMessage ="First Name- Alphabets Only!..")]
+        [Required(ErrorMessage ="First Name not be null")]
+       [RegularExpression(@"^[a-zA-Z]+$",ErrorMessage ="Alphabets Only!..")]
         public string FName { get; set; }
-        [Required(ErrorMessage = "Middle Name not be null..")]
-
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Middle Name -Alphabets Only!")]
+        
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Alphabets Only!")]
         public string MName { get; set; }
         [Required(ErrorMessage = "Last Name-not null")]
 
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Last Name -Alphabets Only!")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Alphabets Only!")]
         public string LName { get; set; }  
-        [Required(ErrorMessage ="Month - Required!")]
+        [Required(ErrorMessage ="Required!")]
         public MonthList? Month { get; set; }
-        [Required(ErrorMessage = "Gender - Required")]
+        [Required(ErrorMessage = "Required!")]
         public GenderList? Gender { get; set; }
-        [Required(ErrorMessage = "Day - Required!")]
+        [Required(ErrorMessage = "Required!")]
         public int? Day { get; set; }
-        [Required(ErrorMessage = "Year - Required!")]
+        [Required(ErrorMessage = "Required!")]
         public int? Year { get; set; }
         public string StreetAddress { get; set; }
         public string StreetAddress1 { get; set; }
@@ -45,9 +44,9 @@ namespace StudentRegistration.Models
         public string MobileNumber { get; set; }
         [RegularExpression(@"^[5-9][0-9]{9}$", ErrorMessage = "Number Contains 10 digits Only-Work")]
         public string WorkNumber { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "State/Province - Alphabets Only!")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "-Alphabets Only!")]
         public string State { get; set; }
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "City - Alphabets Only!")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "- Alphabets Only!")]
         public string City { get; set; }
         [Required(ErrorMessage = "Zip Code - Required")]
         [RegularExpression(@"^[0-9]{6}$", ErrorMessage = "Only digits and lenght 6 chars")]

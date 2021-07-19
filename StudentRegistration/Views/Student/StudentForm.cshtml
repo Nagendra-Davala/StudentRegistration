@@ -4,125 +4,176 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Manage Student</title>
-    <link href="~/css/Student.css" rel="stylesheet" />
-    <link rel="icon" href="~/student.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
-   
-    <form asp-controller="Student" asp-action="StudentForm" method="post">
-        <div style="margin-left:25%">
-            <!-- <div asp-validation-summary="All"></div>-->
-            <h2>Student Registration Form</h2>
-            <label>
-                Fill out the form carefully for registration
-            </label>
-            <br><br>
-            <label><b>Student Name</b></label>
-            <br><br>
-            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="first">
-                <input type="text" asp-for="FName" style="width:146px">
-                <input type="text" asp-for="MName" style="width:146px">
-                <input type=text asp-for="LName" style="width:146px">
-                <br>
-                <label class="form-sub-label" asp-for="FName"> First Name </label>
-                <label class="full-name-label" asp-for="MName"> Middle Name </label>
-                <label class="full-name-label-l" asp-for="LName"> Last Name </label><br />
-                <span asp-validation-for="FName" class="text-danger1"></span>
-                <span asp-validation-for="MName" class="text-danger1"></span>
-                <span asp-validation-for="LName" class="text-danger1"></span>
-            </span>
+    <div style="margin-left:25%;margin-right:25%">
+        <form asp-controller="Student" asp-action="StudentForm" method="post">
+            <div class="container">
+                <div>
+                    <h2>Student Registration Form</h2>
+                    <label>
+                        Fill out the form carefully for registration
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label><b>Student Name</b></label>
+                    </div>
+                </div>
 
-            <br>
-            <label><b> Birth Date</b> </label>
-            <label class="gender" asp-for="Gender"><b>Gender</b></label>
-            <br>
-            <select asp-for="Month" asp-items="@Html.GetEnumSelectList<MonthList>()" class="form-dropdown" style=" width : 72px">
-                <option value=""> </option>
-            </select>
-            <partial name="_DayYear" model="Model" />
+                <div class="row">
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" asp-for="FName" />
+                        <label>Full Name</label><br />
+                        <span asp-validation-for="FName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" asp-for="MName" />
+                        <label>Middle Name</label>
+                        <span asp-validation-for="MName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" asp-for="LName" />
+                        <label >Last Name</label><br />
+                        <span asp-validation-for="LName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
 
-            <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<GenderList>()" style=" width: 220px;">
-                <option value=""> Please Select </option>
-            </select>
+                    <div class="col-md-9">
+                        <label><b> Birth Date</b> </label>
 
-            <br>
-            <label asp-for="Month">Month</label>
-            <label class="city" asp-for="Day">Day</label>
-            <label class="city" asp-for="Year">Year</label>
-            <br />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="gender" asp-for="Gender"><b>Gender</b></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <select asp-for="Month" asp-items="@Html.GetEnumSelectList<MonthList>()" class="form-dropdown form-control">
+                            <option value=""> </option>
+                        </select>
 
-            <span asp-validation-for="Month" class="text-danger1"></span>
-            <span asp-validation-for="Day" class="text-danger1"></span>
-            <span asp-validation-for="Year" class="text-danger1"></span>
-            <span asp-validation-for="Gender" class="text-danger1"></span>
+                        <label asp-for="Month">Month</label>
+                        <span asp-validation-for="Month" class="text-danger"></span>
 
-            <br />
-            <label><b>Address</b></label>
-            <br><br>
-            <input asp-for="StreetAddress" type="text" style="width: 450px;">
-            <br>
-            <label asp-for="StreetAddress">Street Address</label>
-            <br><br>
-            <input asp-for="StreetAddress1" type="text" style="width: 450px;">
-            <br>
-            <label asp-for="StreetAddress1">Street Address Line 2</label>
-            <br><br>
-            <input asp-for="City" type="text"style="width:223px">
-            <input asp-for="State"type="text" style="width :223px">
 
-            <br>
-            <label asp-for="City">City</label>&emsp;
-            <label class="state" asp-for="State">State / Province</label><br />
-            <span asp-validation-for="City" class="text-danger1"></span>
-            <a class="state-error"></a>
-            <span asp-validation-for="State" class="text-danger1"></span>
-            <br><br>
-            <input type="number" asp-for="ZipCode" style="width: 450px;">
-            <br>
-            <label asp-for="ZipCode">Postal / Zip Code</label>
-            <span asp-validation-for="ZipCode" class="text-danger1"></span>
-            <br><br>
-            <label asp-for="Email"><b>Student E-mail</b></label>&ensp;
-            <label class="number" asp-for="MobileNumber"> <b>Mobile Number</b> </label> <br>
-            <input type="email" asp-for="Email" placeholder="ex: myname@example.com" style="width:227px">
+                    </div>
+                    <div class="col-md-3">
 
-            <input type="tel" asp-for="MobileNumber" placeholder="(000) 000-0000" style="width:217px">
-            <br>
-            <label>example@example.com</label> <a class="gender-text"></a>
-            <span asp-validation-for="MobileNumber" class="text-danger1"></span>
-            <br />
-            <span asp-validation-for="Email" class="text-danger1"></span>
-            <br><br>
-            <label asp-for="PhoneNumber"><b> Phone Number</b> </label>&ensp;
-            <label class="number" asp-for="WorkNumber"><b> Work Number</b> </label> <br>
-            <input type="tel" asp-for="PhoneNumber" style="width:227px" placeholder="(000) 000-0000">
+                        <partial name="_Day" model="Model" />
+                        <label asp-for="Day">Day</label>
+                        <span asp-validation-for="Day" class="text-danger"></span>
 
-            <input style="width:217px" type="tel" asp-for="WorkNumber" placeholder="(000) 000-0000">
-            <br />
-            <span asp-validation-for="WorkNumber" class="text-danger1"></span>
-            <a class="full-name"></a>
-            <span asp-validation-for="PhoneNumber" class="text-danger1"></span>
-            <br>
-            <br>
-            <label asp-for="Company"><b>Company</b></label> <br>
-            <input type="text"asp-for="Company" style="width:223px">
-            <span asp-validation-for="Company" class="text-danger1"></span>
-            <br><br />
-            <label asp-for="Courses"><b>Courses</b></label><br>
-            <select class="form-dropdown" asp-for="Courses" asp-items="@Html.GetEnumSelectList<CoursesList>()" style="width:230px">
-                <option value=""> Please Select </option>
-            </select> <br><span asp-validation-for="Courses" class="text-danger1"></span>
-            <br>
-            <partial name="_TextArea" model="Model" />
 
-            <br><br>
-            <button class="sb-btn" type="submit" id="button1">Submit Application</button>
-            <a class="number"></a>
-            <button class="btn-custom" type="reset">Clear Fields</button>
-        </div>
-        
-    </form>
+                    </div>
+                    <div class="col-md-3">
+                        <partial name="_Year" model="Model" />
+                        <label asp-for="Year">Year</label>
+                        <span asp-validation-for="Year" class="text-danger"></span>
 
+                    </div>
+                    <div class="col-md-3">
+                        <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<GenderList>()" class="form-dropdown form-control">
+                            <option value=""> Please Select </option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label><b>Address</b></label>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <input class="form-control" asp-for="StreetAddress" type="text">
+                        <label asp-for="StreetAddress">Street Address</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input class="form-control" asp-for="StreetAddress1" type="text">
+                        <label asp-for="StreetAddress1">Street Address Line 2</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input class="form-control" asp-for="City" type="text">
+                        <label asp-for="City">City</label>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" asp-for="State" type="text">
+                        <label asp-for="State">State / Province</label>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input class="form-control" asp-for="ZipCode" type="text">
+                        <label asp-for="ZipCode">Postal / Zip Code</label>
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="Email"><b>Student E-mail</b></label>
+                        <input class="form-control" type="email" asp-for="Email" placeholder="ex: myname@example.com">
+                        <label>example@example.com</label><br />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="MobileNumber"> <b>Mobile Number</b> </label>
+                        <input class="form-control" type="tel" asp-for="MobileNumber" placeholder="(000) 000-0000">
+                        <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="PhoneNumber"><b> Phone Number</b> </label>
+                        <input class="form-control" type="tel" asp-for="PhoneNumber" placeholder="(000) 000-0000">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+
+                        <label asp-for="WorkNumber"><b>Mobile Number</b> </label>
+                        <input class="form-control" type="tel" asp-for="WorkNumber" placeholder="(000) 000-0000">
+                        <span asp-validation-for="WorkNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="Company"><b>Company</b></label> <br>
+                        <input class="form-control" type="text" asp-for="Company"><span asp-validation-for="Company" class="text-danger"></span>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label asp-for="Courses"><b>Courses</b></label>
+                        <select class="form-dropdown form-control" asp-for="Courses" asp-items="@Html.GetEnumSelectList<CoursesList>()">
+                            <option value=""> Please Select </option>
+                        </select><span asp-validation-for="Courses" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <partial name="_TextArea" model="Model" />
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-md-5">
+                        <button type="submit" class="btn btn-success">Submit Application</button>
+                    </div>
+                    <div class="col-md-3 offset-md-4">
+                        <button type="reset" class="btn btn-success">Clear Fields</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
 </body>
 </html>
