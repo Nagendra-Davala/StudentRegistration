@@ -1,9 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StudentRegistration.Filters;
 using StudentRegistration.Models;
+using ClosedXML;
+using ClosedXML.Excel;
+using System.IO;
+using OfficeOpenXml;
 
 namespace StudentRegistration.Controllers
 {
@@ -15,10 +22,7 @@ namespace StudentRegistration.Controllers
         {
            _studentRepository = studentRepository;
         }
-        public IActionResult Sample()
-        {
-            return View();
-        }
+       
         public IActionResult Index()
         {
             return View();
@@ -28,11 +32,13 @@ namespace StudentRegistration.Controllers
         {
             return View();
         }
+        [HttpsOnly]
         [HttpPost]
         public IActionResult StudentForm(StudentModel student)
         {
             if (ModelState.IsValid)
             {
+                HttpContext.Session.SetString("First_Name",student.FName);
                 StudentModel newStudent = _studentRepository.Add(student);
                  return RedirectToAction("GetStudent", new { id = newStudent.Id });
             }
@@ -49,5 +55,63 @@ namespace StudentRegistration.Controllers
         {
             return View(student);
         }
+           
+        public IActionResult GetAllStudents()
+        {
+            var data = _studentRepository.GetAllStudents();
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult Delete(string Email)
+        {
+            var data = _studentRepository.Delete(Email);
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult Update(int Id,StudentModel studentModel)
+        {
+            var data = _studentRepository.Update(Id, studentModel);
+            return View(data);
+        }
+        public IActionResult CSV()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("FirstName,MiddleName,LastName,Month,Gender,Day,Year,StreetAddress,StreetAddress2,Email,PhoneNumber,MobileNumber,WorkNumber,State,City,ZipCode,Company,Courses,Comments");
+            // var data = _context.Students.ToList<StudentModel>();
+            var data = _studentRepository.GetAllStudents();
+            foreach (StudentModel student in data)
+            {
+                builder.AppendLine($"{student.FName},{student.MName},{student.LName},{student.Month},{student.Gender},{student.Day},{student.Year},{student.StreetAddress},{student.StreetAddress1},{student.City},");
+            }
+            return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "Student.csv");
+        }
+
+        public IActionResult Excel()
+        {
+            using(var workbook = new XLWorkbook() )
+            {
+                var worksheet = workbook.Worksheets.Add("Students");
+                var currentRow = 1;
+                worksheet.Cell(currentRow, 1).Value = "FName";
+                var data = _studentRepository.GetAllStudents();
+                foreach(StudentModel student in data)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = student.FName;
+
+                }
+                using(var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content,
+                        "application/vnd.openxmlformats-officedocument.spredsheetxml.sheet",
+                        "Student.xlsx");
+                }
+            }
+        }
+       
+
+
     }
 }

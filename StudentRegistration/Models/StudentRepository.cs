@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StudentRegistration.Models
 {
-    public class StudentRepository :IStudentRepository
+    public class StudentRepository /*IStudentRepository*/
     {
         private List<StudentModel> GetStudents;
         public StudentRepository()
@@ -14,14 +14,15 @@ namespace StudentRegistration.Models
         }
         public StudentModel Add(StudentModel student)
         {
-            student.Id = 10;
+            student.Id = 1;
             GetStudents.Add(student);
             return student;
         }
-        public StudentModel GetStudent(int Id)
+        public StudentModel GetStudent(int? Id)
         {
-
+            
             return GetStudents.FirstOrDefault(e => e.Id == Id);
+            
         }
     }
 }

@@ -15,6 +15,7 @@ namespace StudentRegistration.Models
     
        public int Id { set; get; }
         [Required(ErrorMessage ="First Name not be null")]
+        
        [RegularExpression(@"^[a-zA-Z]+$",ErrorMessage ="Alphabets Only!..")]
         public string FName { get; set; }
         
@@ -36,6 +37,7 @@ namespace StudentRegistration.Models
         public string StreetAddress1 { get; set; }
         [Required]
         [RegularExpression(@"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+$", ErrorMessage = "Email format is wrong!")]
+        
         public string Email { get; set; }
         [Required]
         [RegularExpression(@"^[5-9][0-9]{9}$", ErrorMessage = "Number Contains 10 digits Only")]
@@ -56,5 +58,6 @@ namespace StudentRegistration.Models
         [Required(ErrorMessage ="Courses required")]
         public CoursesList? Courses { get; set; }
         public string Comments { get; set; }
+      
     }
 }

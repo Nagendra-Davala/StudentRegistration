@@ -1,0 +1,15 @@
+﻿@model IEnumerable<StudentModel>
+<table>
+
+    @foreach (var i in Model)
+    {
+
+        <tr>
+            <td> @i.Email</td>
+            <td>@i.FName</td>
+           
+        </tr>
+   
+    }
+</table>
+
