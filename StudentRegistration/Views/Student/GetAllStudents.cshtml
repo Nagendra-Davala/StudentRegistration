@@ -1,15 +1,73 @@
-﻿@model IEnumerable<StudentModel>
-<table>
+﻿@model IEnumerable<StudentRegistration.Models.StudentModel>
 
-    @foreach (var i in Model)
-    {
+@{
+    Layout = "_StudentLayout";
+}
 
-        <tr>
-            <td> @i.Email</td>
-            <td>@i.FName</td>
-           
-        </tr>
-   
-    }
-</table>
 
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetAllStudents</title>
+</head>
+<body>
+    <p>
+        <a asp-action="StudentForm">Create New</a>
+    </p>
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Courses)
+                </th>
+                <th>
+                    <h6>Actions</h6>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Courses)
+                </td>
+
+                <td>
+                    <a asp-action="GetStudent" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Student" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>
+</body>
+</html>

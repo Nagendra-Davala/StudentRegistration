@@ -11,8 +11,11 @@ namespace StudentRegistration.Models
         StudentModel Add(StudentModel student);
         StudentModel GetStudent(int? Id);
         List<StudentModel> GetAllStudents();
-        StudentModel Delete(string Email);
+        StudentModel Delete(int id);
         StudentModel Update(int Id,StudentModel studentModel);
-     
+        StudentModel DeleteConfirm(StudentModel student);
+
+
+
     }
 }

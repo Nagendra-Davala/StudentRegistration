@@ -1,14 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
 }
 @model StudentModel
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <!-- <img src="~/student.ico" />-->
-    <form asp-action="Delete" asp-controller="Student" method="post">
-        <input asp-for="@Model.Email" />
-        <input type="submit" value="Delete" />
-
-    </form><br />
-    
+    <!-- <img src="~/student.ico" />-->   
 </div>

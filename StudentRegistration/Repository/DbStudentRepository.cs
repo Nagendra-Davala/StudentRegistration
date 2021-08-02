@@ -27,25 +27,35 @@ namespace StudentRegistration.Repository
             return student;
         }
 
-        public StudentModel Delete(string Email)
+        public StudentModel Delete(int id)
         {
-            var data = _context.Students.Where(s => s.Email == Email).FirstOrDefault();
-            _context.Students.Remove(data);
-            _context.SaveChanges();
+            var data = _context.Students.Where(s => s.Id == id).FirstOrDefault();
+            //_context.Students.Remove(data);
+            //_context.SaveChanges();
             return data;
 
         }
-      
+        [HttpPost]
+        public StudentModel DeleteConfirm(StudentModel student)
+        {
+            // var data = _context.Students.Where(s => s.Email == Email).FirstOrDefault();
+            _context.Students.Remove(student);//.State = EntityState.Deleted;
+            _context.SaveChanges();
+            return student;
+
+        }
+
         public StudentModel Update(int Id,StudentModel studentModel)
         {
-            _context.Students.Find(Id).Email = studentModel.Email;
-            _context.Students.Find(Id).PhoneNumber = studentModel.PhoneNumber;
 
-            // _context.Students.Attach(studentModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            //    _context.Students.Find(Id).Email = studentModel.Email;
+            //_context.Students.Find(Id).PhoneNumber = studentModel.PhoneNumber;
+          //  _context.Students.Attach(studentModel).Entity.Equals(Id);
+             _context.Students.Attach(studentModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             var data = _context.Students.Find(Id);
            _context.SaveChanges();
             return data;
-
+                
         }
 
         public List<StudentModel> GetAllStudents()

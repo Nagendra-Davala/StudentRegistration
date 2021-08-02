@@ -40,10 +40,16 @@ namespace StudentRegistration.Controllers
             {
                 HttpContext.Session.SetString("First_Name",student.FName);
                 StudentModel newStudent = _studentRepository.Add(student);
-                 return RedirectToAction("GetStudent", new { id = newStudent.Id });
+                // return RedirectToAction("GetStudent", new { id = newStudent.Id });
+                return RedirectToAction("GetAllStudents");
             }
 
             return View();
+        }
+        public IActionResult Details(int id)
+        {
+            StudentModel student1 = _studentRepository.GetStudent(id);
+            return View("Details", student1);
         }
         public IActionResult GetStudent(int id)
         {
@@ -61,17 +67,26 @@ namespace StudentRegistration.Controllers
             var data = _studentRepository.GetAllStudents();
             return View(data);
         }
-        [HttpPost]
-        public IActionResult Delete(string Email)
+        public IActionResult Delete(int Id)
         {
-            var data = _studentRepository.Delete(Email);
+            var data = _studentRepository.Delete(Id);
             return View(data);
+        }
+        [HttpPost]
+        public IActionResult DeleteConfirm(StudentModel studentModel)
+        {
+            var data = _studentRepository.DeleteConfirm(studentModel);
+            return View("Index");
         }
         [HttpPost]
         public IActionResult Update(int Id,StudentModel studentModel)
         {
-            var data = _studentRepository.Update(Id, studentModel);
-            return View(data);
+            if (ModelState.IsValid)
+            {
+                var data = _studentRepository.Update(Id, studentModel);
+                return View("Index");
+            }
+            return RedirectToAction("GetStudent", new { id = Id });
         }
         public IActionResult CSV()
         {
