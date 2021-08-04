@@ -102,7 +102,7 @@ namespace StudentRegistration.Controllers
             if (ModelState.IsValid)
             {
                 var data = _studentRepository.Update(Id, studentModel);
-                return View("Index");
+                return RedirectToAction("Details",new { id = Id });
             }
             return RedirectToAction("GetStudent", new { id = Id });
         }

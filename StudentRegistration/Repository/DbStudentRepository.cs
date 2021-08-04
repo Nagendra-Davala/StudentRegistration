@@ -84,6 +84,7 @@ namespace StudentRegistration.Repository
             if (!(string.IsNullOrEmpty(company)))
             {
                 data = data.Where(x => x.Company.Contains(company)).ToList();
+              
             }
             
             return data;
