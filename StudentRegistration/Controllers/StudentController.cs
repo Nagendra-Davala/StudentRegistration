@@ -38,8 +38,9 @@ namespace StudentRegistration.Controllers
         {
             if (ModelState.IsValid)
             {
-                HttpContext.Session.SetString("First_Name",student.FName);
-                StudentModel newStudent = _studentRepository.Add(student);
+              //  HttpContext.Session.SetString("First_Name",student.FName);
+              //  StudentModel newStudent =
+                    _studentRepository.Add(student);
                 // return RedirectToAction("GetStudent", new { id = newStudent.Id });
                 return RedirectToAction("GetAllStudents");
             }
@@ -76,7 +77,24 @@ namespace StudentRegistration.Controllers
         public IActionResult DeleteConfirm(StudentModel studentModel)
         {
             var data = _studentRepository.DeleteConfirm(studentModel);
-            return View("Index");
+            //  return View("GetAllStudents");
+            return RedirectToAction("GetAllStudents");
+        }
+        [HttpPost]
+        public IActionResult Search(IFormCollection form)
+        {
+            string email =form["email"];
+            string name = form["fname"];
+            string company = form["company"];
+           
+            if(string.IsNullOrEmpty(email) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(company))
+            {
+                GetAllStudents();
+            }
+           
+              var data =  _studentRepository.Search(name,email,company);
+                return View("GetAllStudents", data);
+          
         }
         [HttpPost]
         public IActionResult Update(int Id,StudentModel studentModel)

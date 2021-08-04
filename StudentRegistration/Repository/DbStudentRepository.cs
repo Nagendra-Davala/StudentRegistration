@@ -64,7 +64,30 @@ namespace StudentRegistration.Repository
             
             return data;
         }
+       
+        public List<StudentModel> Search(string name,string email,string company)
+        {
+            var data = _context.Students.ToList();
 
+            //if (!(string.IsNullOrEmpty(email) && string.IsNullOrEmpty(name)))
+            //{
+            //    data = data.Where(x => x.FName.Contains(name) || x.Email.Contains(email)).ToList();
+            //}
+           if (!(string.IsNullOrEmpty(name)))
+            {
+                data = data.Where(x => x.FName.Contains(name)).ToList();
+            }
+             if ( !(string.IsNullOrEmpty(email)))
+            {
+                data = data.Where(x => x.Email.Contains(email)).ToList();
+            }
+            if (!(string.IsNullOrEmpty(company)))
+            {
+                data = data.Where(x => x.Company.Contains(company)).ToList();
+            }
+            
+            return data;
+        }
         public StudentModel GetStudent(int? Id)
         {
           //  var data = _context.Students.Where(s => s.Id == Id).FirstOrDefault();

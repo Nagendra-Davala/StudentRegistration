@@ -58,6 +58,7 @@ namespace StudentRegistration.Models
         [Required(ErrorMessage ="Courses required")]
         public CoursesList? Courses { get; set; }
         public string Comments { get; set; }
+        public string Search { get; set; }
       
     }
 }
