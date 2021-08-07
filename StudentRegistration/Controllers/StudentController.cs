@@ -25,12 +25,12 @@ namespace StudentRegistration.Controllers
        
         public IActionResult Index()
         {
-            return View();
+            return View( );
         }
         [HttpGet]
         public IActionResult StudentForm()
         {
-            return View();
+            return View("modal");
         }
         [HttpsOnly]
         [HttpPost]
@@ -55,7 +55,7 @@ namespace StudentRegistration.Controllers
         public IActionResult GetStudent(int id)
         {
             StudentModel student1 = _studentRepository.GetStudent(id);
-            return View("StudentDetails", student1);
+            return View("Edit", student1);
         }
 
         public IActionResult StudentDetails(StudentModel student)
@@ -67,6 +67,7 @@ namespace StudentRegistration.Controllers
         {
             var data = _studentRepository.GetAllStudents();
             return View(data);
+          //  return View();
         }
         public IActionResult Delete(int Id)
         {
@@ -81,20 +82,20 @@ namespace StudentRegistration.Controllers
             return RedirectToAction("GetAllStudents");
         }
         [HttpPost]
-        public IActionResult Search(IFormCollection form)
+         public IActionResult Search(IFormCollection form)
         {
-            string email =form["email"];
+            string email = form["email"];
             string name = form["fname"];
             string company = form["company"];
-           
-            if(string.IsNullOrEmpty(email) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(company))
+           string course = form["course"];
+            if (string.IsNullOrEmpty(email) && string.IsNullOrEmpty(name) && string.IsNullOrEmpty(company))
             {
                 GetAllStudents();
             }
+
+            var data = _studentRepository.Search(name, email, company);
+            return View("GetAllStudents", data);
            
-              var data =  _studentRepository.Search(name,email,company);
-                return View("GetAllStudents", data);
-          
         }
         [HttpPost]
         public IActionResult Update(int Id,StudentModel studentModel)
@@ -102,7 +103,8 @@ namespace StudentRegistration.Controllers
             if (ModelState.IsValid)
             {
                 var data = _studentRepository.Update(Id, studentModel);
-                return RedirectToAction("Details",new { id = Id });
+                //  return RedirectToAction("Details",new { id = Id });
+                return RedirectToAction("GetAllStudents");
             }
             return RedirectToAction("GetStudent", new { id = Id });
         }
@@ -143,8 +145,12 @@ namespace StudentRegistration.Controllers
                 }
             }
         }
+       public IActionResult GetName(int id)
+        {
+           string name = _studentRepository.GetName(id);
+            return View("GetName",name);
+        }
        
-
 
     }
 }

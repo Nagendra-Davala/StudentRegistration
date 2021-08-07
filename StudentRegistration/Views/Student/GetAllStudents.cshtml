@@ -9,23 +9,30 @@
     <title>GetAllStudents</title>
 </head>
 <body>
+    <h1><i class="fas fa-comment-dollar text-success"></i>Students</h1>
     <form method="post" asp-action="Search">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <input type="search" name="fname" placeholder="First Name" class="form-control" />
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <input type="search" name="email" placeholder="Email" class="form-control" />
             </div>
             <div class="col-md-3">
                 <input type="search" name="company" placeholder="company" class="form-control" />
             </div>
+            <!-- <div class="col-md-2">
+                <select class="form-dropdown form-control" name="Courses" asp-items="@@Html.GetEnumSelectList<CoursesList>()">
+                    <option value=""> Please Select </option>
+                </select>
+            </div>-->
             <div class="col-md-3 ">
                 <input type="submit" value="Search" class="btn btn-primary" />
             </div>
 
         </div>
     </form> <br />
+
     <table class="table" border="1">
         <thead>
             <tr>
@@ -48,44 +55,40 @@
                 <th>
                     <h6>Actions</h6>
                 </th>
-                <th></th>
+                <th><a onclick="showPop('@Url.Action("StudentForm", "Student", Context.Request.Scheme)' ,'Create New')" class="btn btn-success text-white"><i class="fas fa-random"></i>Create New</a></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Company)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Courses)
-                </td>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Courses)
+                    </td>
 
-                <td>
-                    <a asp-action="GetStudent" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a> |
-                    <a asp-controller="Student" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
-               
-                </td>
-            </tr>
-}
+                    <td>
+                        <a onclick="showPop('@Url.Action("GetStudent", "Student",new { id = item.Id }, Context.Request.Scheme)' ,'Edit')" class="btn btn-primary btn-sm">Edit</a> |
+                        <a onclick="showPop('@Url.Action("Details", "Student",new { id = item.Id }, Context.Request.Scheme)' ,'Details')" class="btn btn-info btn-sm">Details</a> |
+                        <a onclick="showPop('@Url.Action("Delete", "Student",new { id = item.Id }, Context.Request.Scheme)' ,'Delete')" class="btn btn-danger btn-sm">Delete</a>
+
+                    </td>
+                </tr>
+
+
+            }
         </tbody>
     </table>
-    <div class="row">
-        <div class="offset-md-9">
-            <p>
-                <a asp-action="StudentForm" class="btn btn-primary">Create New</a>
-            </p>
-        </div>
-    </div>
 </body>
 </html>

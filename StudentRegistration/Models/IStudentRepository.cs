@@ -15,6 +15,7 @@ namespace StudentRegistration.Models
         StudentModel Update(int Id,StudentModel studentModel);
         StudentModel DeleteConfirm(StudentModel student);
         List<StudentModel> Search(string email,string name,string company);
+        string GetName(int id);
 
 
     }

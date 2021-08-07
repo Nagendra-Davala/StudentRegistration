@@ -1,6 +1,7 @@
 ﻿@model StudentModel
 @{ 
-    Layout = "_StudentLayout";
+  // Layout = "_StudentLayout";
+     Layout =null;
 }
 <!Doctype html>
 <html>
@@ -37,7 +38,7 @@
                     </div>
                     <div class="col-md-4">
                         <input class="form-control" type="text" asp-for="LName" />
-                        <label >Last Name</label><br />
+                        <label>Last Name</label><br /><span class="glyphicon glyphicon-star"></span>
                         <span asp-validation-for="LName" class="text-danger"></span>
                     </div>
                 </div>
@@ -150,7 +151,7 @@
                     <div class="col-md-6">
                         <label asp-for="Company"><b>Company</b></label> <br>
                         <input class="form-control" type="text" asp-for="Company"><span asp-validation-for="Company" class="text-danger"></span>
-                        
+
                     </div>
                 </div>
                 <div class="row">
@@ -178,6 +179,7 @@
 
         </form>
     </div>
+
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>

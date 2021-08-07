@@ -1,6 +1,7 @@
 ﻿@model StudentModel
 @{
-    Layout = "_StudentLayout";
+ //  Layout = "_StudentLayout";
+   Layout = null;
 }
 <!Doctype html>
 <html>
@@ -9,7 +10,7 @@
     <title>Manage Student</title>
 </head>
 <body>
-    <form asp-action="Update" asp-route-Id="@Model.Id" method="post">
+    <form asp-action="Update" class="text-center" asp-route-Id="@Model.Id" method="post">
         <partial name="_View.cshtml" />
     </form>
     <script src="~/lib/jquery/dist/jquery.js"></script>

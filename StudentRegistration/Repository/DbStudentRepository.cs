@@ -69,24 +69,25 @@ namespace StudentRegistration.Repository
         {
             var data = _context.Students.ToList();
 
-            //if (!(string.IsNullOrEmpty(email) && string.IsNullOrEmpty(name)))
-            //{
-            //    data = data.Where(x => x.FName.Contains(name) || x.Email.Contains(email)).ToList();
-            //}
-           if (!(string.IsNullOrEmpty(name)))
+            if (!(string.IsNullOrEmpty(email) && string.IsNullOrEmpty(name)))
+            {
+                data = data.Where(x => x.FName.Contains(name) || x.Email.Contains(email)).ToList();
+            }
+            if (!(string.IsNullOrEmpty(name)))
             {
                 data = data.Where(x => x.FName.Contains(name)).ToList();
             }
-             if ( !(string.IsNullOrEmpty(email)))
+            if (!(string.IsNullOrEmpty(email)))
             {
                 data = data.Where(x => x.Email.Contains(email)).ToList();
             }
             if (!(string.IsNullOrEmpty(company)))
             {
                 data = data.Where(x => x.Company.Contains(company)).ToList();
-              
+
             }
-            
+           
+
             return data;
         }
         public StudentModel GetStudent(int? Id)
@@ -95,7 +96,12 @@ namespace StudentRegistration.Repository
            var data = _context.Students.Find(Id ?? 1);
             return data;
         }
-
-      
+     
+        public string GetName(int id)
+        {
+            var data = from s in _context.Students select s.Id;
+            string name = (from s in _context.Students where s.Id == id select s.FName).FirstOrDefault().ToString();
+            return name;
+        }
     }
 }
